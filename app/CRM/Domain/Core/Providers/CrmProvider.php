@@ -20,7 +20,6 @@ class CrmProvider extends ServiceProvider implements DeferrableProvider
         $this->app->bind(WarehousesRepositoryContract::class, WarehousesRepository::class);
         $this->app->bind(WarehouseGetAllContract::class, WarehouseGeaAllService::class);
     }
-
     /**
      * Bootstrap services.
      */
