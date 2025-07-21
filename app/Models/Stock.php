@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Класс Stock
+ * Класс app\CRM\Domain\Core\Entities\Stock
  * namespace App\Models;
  *
  */

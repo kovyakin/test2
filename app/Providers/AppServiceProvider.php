@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\CRM\Domain\Core\Providers\CrmProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->register(CrmProvider::class);
     }
 
     /**
@@ -19,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+
+
     }
+
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Класс Order
+ * Класс app\CRM\Domain\Core\Entities\Order
  * namespace App\Models;
  *
  */

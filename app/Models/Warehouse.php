@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Класс Warehouse
+ * Класс app\CRM\Domain\Core\Entities\Warehouse
  * namespace App\Models;
  *
  */
