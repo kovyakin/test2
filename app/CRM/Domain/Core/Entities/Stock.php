@@ -60,5 +60,13 @@ final class Stock
         $this->warehouse_id = $warehouse_id;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'product_id' => $this->product_id,
+            'stock' => $this->stock,
+            'warehouse_id' => $this->warehouse_id,
+        ];
+    }
 
 }

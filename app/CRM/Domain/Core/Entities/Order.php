@@ -11,6 +11,28 @@ namespace app\CRM\Domain\Core\Entities;
 final class Order
 {
     /**
+     * @param  string  $completed_at
+     * @param  string  $created_at
+     * @param  string  $customer
+     * @param  string  $status
+     * @param  int  $warehouse_id
+     * Order constructor
+     */
+    public function __construct(
+        string $completed_at,
+        string $created_at,
+        string $customer,
+        string $status,
+        int $warehouse_id
+    ) {
+        $this->completed_at = $completed_at;
+        $this->created_at = $created_at;
+        $this->customer = $customer;
+        $this->status = $status;
+        $this->warehouse_id = $warehouse_id;
+    }
+
+    /**
      * @return string
      */
     public function getCompletedAt(): string
@@ -46,6 +68,15 @@ final class Order
      * @var string
      */
     private string $customer;
+
+    /**
+     * @return string
+     */
+    public function getCreatedAt(): string
+    {
+        return $this->created_at;
+    }
+
     /**
      * @var int
      */
@@ -60,18 +91,22 @@ final class Order
     private string $status;
 
     /**
-     * @param  string  $completed_at
-     * @param  string  $customer
-     * @param  string  $status
-     * @param  int  $warehouse_id
-     * app\CRM\Domain\Core\Entities\Order constructor
+     * @var string
      */
-    public function __construct(string $completed_at, string $customer, string $status, int $warehouse_id)
-    {
-        $this->completed_at = $completed_at;
-        $this->customer = $customer;
-        $this->status = $status;
-        $this->warehouse_id = $warehouse_id;
-    }
+    private string $created_at;
 
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'completed_at' => $this->completed_at,
+            'customer' => $this->customer,
+            'status' => $this->status,
+            'warehouse_id' => $this->warehouse_id,
+            'created_at' => $this->created_at,
+        ];
+    }
 }

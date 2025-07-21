@@ -16,16 +16,18 @@ class WarehousesRepository implements WarehousesRepositoryContract
         $warehouses = EloquentWarehouse::all();
 
         return $warehouses->map(function (EloquentWarehouse $warehouse) {
-            return new Warehouse($warehouse->name);
+            return new Warehouse($warehouse->id, $warehouse->name);
         })->all();
     }
 
     public function toArray(Warehouse $warehouses): Collection
     {
-        $a = collect();
+        $collect = collect();
+
         foreach ($warehouses as $warehouse) {
-           $a->push($warehouse->jsonSerialize()) ;
+            $collect->push($warehouse->jsonSerialize());
         }
-        return $a;
+
+        return $collect;
     }
 }

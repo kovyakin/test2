@@ -10,10 +10,22 @@ namespace App\CRM\Domain\Core\Entities;
  */
 final class Warehouse
 {
+    private ?int $id;
     /**
      * @var string
      */
     private string $name;
+
+    /**
+     * @param $id
+     * @param  string  $name
+     * Warehouse constructor
+     */
+    public function __construct(?int $id, string $name)
+    {
+        $this->id = $id;
+        $this->name = $name;
+    }
 
     /**
      * @return string
@@ -23,16 +35,17 @@ final class Warehouse
         return $this->name;
     }
 
-    /**
-     * @param  string  $name
-     * app\CRM\Domain\Core\Entities\Warehouse constructor
-     */
-    public function __construct(string $name)
+    public function getId(): ?int
     {
-        $this->name = $name;
+        return $this->id;
     }
+
+
     public function jsonSerialize(): array
     {
-        return ['name' => $this->name];
+        return [
+            'id' => $this->id,
+            'name' => $this->name
+        ];
     }
 }

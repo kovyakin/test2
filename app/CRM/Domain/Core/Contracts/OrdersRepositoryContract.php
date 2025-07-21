@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\CRM\Domain\Core\Contracts;
 
-use App\CRM\Domain\Core\Entities\Warehouse;
+use app\CRM\Domain\Core\Entities\Order;
 use Illuminate\Support\Collection;
 
-interface WarehousesRepositoryContract
+interface OrdersRepositoryContract
 {
     public function getAll(): array;
-
-    public function toArray(Warehouse $warehouses): Collection;
+    public function toArray(Order $orders): Collection;
 }

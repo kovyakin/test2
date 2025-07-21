@@ -10,6 +10,7 @@ namespace app\CRM\Domain\Core\Entities;
  */
 final class Product
 {
+    private ?int  $id;
     /**
      * @var string
      */
@@ -18,6 +19,19 @@ final class Product
      * @var float
      */
     private float $price;
+
+    /**
+     * @param  int|null  $id
+     * @param  string  $name
+     * @param  float  $price
+     * Product constructor
+     */
+    public function __construct(?int $id, string $name, float $price)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->price = $price;
+    }
 
     /**
      * @return string
@@ -35,14 +49,14 @@ final class Product
         return $this->price;
     }
 
-    /**
-     * @param  string  $name
-     * @param  float  $price
-     * app\CRM\Domain\Core\Entities\Product constructor
-     */
-    public function __construct(string $name, float $price)
+
+
+    public function jsonSerialize(): array
     {
-        $this->name = $name;
-        $this->price = $price;
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'price' => $this->price,
+        ];
     }
 }
