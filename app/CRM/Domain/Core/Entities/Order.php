@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\CRM\Domain\Core\Entities;
 
+use App\CRM\Domain\Core\Events\CreateOrder;
+
 /**
  * Класс app\CRM\Domain\Core\Entities\Order
  *
@@ -13,7 +15,7 @@ final class Order
     /**
      * @var int
      */
-    private int $id;
+    private ?int $id;
     /**
      * @var int
      */
@@ -54,6 +56,28 @@ final class Order
         $this->customer = $customer;
         $this->status = $status;
         $this->warehouse_id = $warehouse_id;
+    }
+
+    public function create(
+        ?int $id,
+        ?string $completed_at,
+        ?string $created_at,
+        string $customer,
+        ?string $status,
+        int $warehouse_id
+    ): self {
+        $order = new self(
+            $id,
+            $completed_at,
+            $created_at,
+            $customer,
+            $status,
+            $warehouse_id
+        );
+
+        event(new CreateOrder($order));
+
+        return $order;
     }
 
     /**

@@ -2,8 +2,10 @@
 
 namespace app\CRM\Domain\Core\Providers;
 
+use App\CRM\Application\Services\OrderService;
 use App\CRM\Application\Services\StocksGetProductsService;
 use App\CRM\Application\Services\WarehouseGeaAllService;
+use App\CRM\Domain\Core\Contracts\OrderContract;
 use App\CRM\Domain\Core\Contracts\OrdersRepositoryContract;
 use App\CRM\Domain\Core\Contracts\ProductsRepositoryContract;
 use App\CRM\Domain\Core\Contracts\StocksGetProductsContract;
@@ -36,6 +38,8 @@ class CrmProvider extends ServiceProvider implements DeferrableProvider
         $this->app->bind(StocksRepositoryContract::class, StockRepository::class);
 
         $this->app->bind(StocksGetProductsContract::class, StocksGetProductsService::class);
+
+        $this->app->bind(OrderContract::class, OrderService::class);
     }
 
     /**

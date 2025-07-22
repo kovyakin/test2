@@ -43,4 +43,9 @@ class OrdersRepository implements OrdersRepositoryContract
 
         return $collect;
     }
+
+    public function create(Order $order): void
+    {
+        EloquentOrder::query()->create($order->jsonSerialize());
+    }
 }

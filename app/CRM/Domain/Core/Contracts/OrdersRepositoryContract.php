@@ -9,6 +9,8 @@ use Illuminate\Support\Collection;
 
 interface OrdersRepositoryContract
 {
+    public function create(Order $order):void;
+
     public function getAll(): array;
     public function toArray(Order $orders): Collection;
 }
