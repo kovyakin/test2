@@ -15,14 +15,3 @@ Route::get('/orders', [OrderController::class,'index'])->name('orders');
 
 Route::post('/orders', [OrderController::class,'create'])->name('orders.store')
     ->middleware('api');
-
-//Route::get('/orders/create ', [OrderController::class,'index'])->name('orders.index');
-
-//
-//GET|HEAD        orders ....................orders.index › App\CRM\Infrastructure\Http\Controllers\OrderController@index
-//  POST            orders ................... orders.store › App\CRM\Infrastructure\Http\Controllers\OrderController@store
-//  GET|HEAD        orders/create .......... orders.create › App\CRM\Infrastructure\Http\Controllers\OrderController@create
-//  GET|HEAD        orders/{order} ............. orders.show › App\CRM\Infrastructure\Http\Controllers\OrderController@show
-//  PUT|PATCH       orders/{order} ......... orders.update › App\CRM\Infrastructure\Http\Controllers\OrderController@update
-//  DELETE          orders/{order} ....... orders.destroy › App\CRM\Infrastructure\Http\Controllers\OrderController@destroy
-//  GET|HEAD        orders/{order}/edit ........ orders.edit › App\CRM\Infrastructure\Http\Controllers\OrderController@edit
