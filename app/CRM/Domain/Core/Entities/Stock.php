@@ -24,6 +24,10 @@ final class Stock
     private int $stock;
 
     /**
+     * @var null|int
+     */
+    private int $id;
+    /**
      * @return int
      */
     public function getProductId(): int
@@ -48,21 +52,27 @@ final class Stock
     }
 
     /**
+     * @param  null|int  $id
      * @param  int  $product_id
      * @param  int  $stock
      * @param  int  $warehouse_id
-     * app\CRM\Domain\Core\Entities\Stock constructor
+     * Stock constructor
      */
-    public function __construct(int $product_id, int $stock, int $warehouse_id)
+    public function __construct(?int $id, int $product_id, int $stock, int $warehouse_id)
     {
+        $this->id = $id;
         $this->product_id = $product_id;
         $this->stock = $stock;
         $this->warehouse_id = $warehouse_id;
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize(): array
     {
         return [
+            'id' => $this->id,
             'product_id' => $this->product_id,
             'stock' => $this->stock,
             'warehouse_id' => $this->warehouse_id,

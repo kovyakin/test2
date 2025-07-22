@@ -19,7 +19,7 @@ class StockRepository implements StocksRepositoryContract
         $stocks = EloquentStock::all();
 
         return $stocks->map(function (EloquentStock $stock) {
-            return new Stock($stock->product_id, $stock->stock, $stock->warehouse_id);
+            return new Stock($stock->id, $stock->product_id, $stock->stock, $stock->warehouse_id);
         })->all();
     }
 
