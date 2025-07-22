@@ -58,6 +58,7 @@ class CrmProvider extends ServiceProvider implements DeferrableProvider
             ProductsRepositoryContract::class,
             OrdersRepositoryContract::class,
             StocksRepositoryContract::class,
+            OrderContract::class,
         ];
     }
 }
