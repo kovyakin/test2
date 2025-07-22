@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\CRM\Domain\Core\Entities;
+namespace App\CRM\Domain\Core\Entities;
 
 /**
  * Класс app\CRM\Domain\Core\Entities\Order
@@ -10,6 +10,28 @@ namespace app\CRM\Domain\Core\Entities;
  */
 final class Order
 {
+    /**
+     * @var int
+     */
+    private int $id;
+    /**
+     * @var int
+     */
+    private int $warehouse_id;
+    /**
+     * @var string
+     */
+    private ?string $completed_at;
+    /**
+     * @var string
+     */
+    private ?string $status;
+
+    /**
+     * @var string
+     */
+    private ?string $created_at;
+
     /**
      * @param  string  $completed_at
      * @param  string  $created_at
@@ -19,12 +41,14 @@ final class Order
      * Order constructor
      */
     public function __construct(
-        string $completed_at,
-        string $created_at,
+        ?int $id,
+        ?string $completed_at,
+        ?string $created_at,
         string $customer,
-        string $status,
+        ?string $status,
         int $warehouse_id
     ) {
+        $this->id = $id;
         $this->completed_at = $completed_at;
         $this->created_at = $created_at;
         $this->customer = $customer;
@@ -77,24 +101,21 @@ final class Order
         return $this->created_at;
     }
 
-    /**
-     * @var int
-     */
-    private int $warehouse_id;
-    /**
-     * @var string
-     */
-    private string $completed_at;
-    /**
-     * @var string
-     */
-    private string $status;
+    public function customer(string $customer): ?self
+    {
+        if ($this->customer === $customer) {
+            return $this;
+        }
+        return null;
+    }
 
-    /**
-     * @var string
-     */
-    private string $created_at;
-
+    public function status(string $status): ?self
+    {
+        if ($this->status === $status) {
+            return $this;
+        }
+        return null;
+    }
 
     /**
      * @return array
@@ -102,6 +123,7 @@ final class Order
     public function jsonSerialize(): array
     {
         return [
+            'id' => $this->id,
             'completed_at' => $this->completed_at,
             'customer' => $this->customer,
             'status' => $this->status,

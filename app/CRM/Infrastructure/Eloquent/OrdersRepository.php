@@ -12,12 +12,18 @@ use App\Models\Order as EloquentOrder;
 
 class OrdersRepository implements OrdersRepositoryContract
 {
-    public function getAll(): array
+    public function getAll(?int $paginate = null): array
     {
-        $orders = EloquentOrder::all();
+        if($paginate){
+            $orders = EloquentOrder::query()->simplePaginate($paginate);
+        }
+        else{
+            $orders = EloquentOrder::all();
+        }
 
         return $orders->map(function (EloquentOrder $order) {
             return new Order(
+                $order->id,
                 $order->completed_at,
                 $order->created_at,
                 $order->customer,

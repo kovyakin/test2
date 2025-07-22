@@ -12,7 +12,6 @@ class CalculateRepository
     private Collection $warehouses;
     private Collection $stocks;
     private Collection $products;
-    private Collection $array;
 
     public function __construct(
         private readonly WarehousesRepository $warehousesRepository,
