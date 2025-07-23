@@ -19,12 +19,12 @@ class CreateOrderItemsCommand
      * @param  int  $product_id
      * CreateOrderItemsCommand constructor
      */
-    public function __construct(?int $id, int $count,  int $order_id, int $product_id)
+    public function __construct(?int $id, int $order_id, int $product_id, int $count,)
     {
         $this->id = $id;
-        $this->count = $count;
         $this->order_id = $order_id;
         $this->product_id = $product_id;
+        $this->count = $count;
     }
 
 }
