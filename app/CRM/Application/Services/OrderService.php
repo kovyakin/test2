@@ -6,6 +6,7 @@ namespace App\CRM\Application\Services;
 
 use App\CRM\Application\Commands\CreateOrderCommand;
 use App\CRM\Application\DTOs\OrderDTO;
+use App\CRM\Application\Exceptions\OrderException;
 use App\CRM\Application\Handlers\CreateOrderHandler;
 use App\CRM\Domain\Core\Contracts\OrderContract;
 use App\CRM\Domain\Core\Contracts\OrdersRepositoryContract;
@@ -23,20 +24,27 @@ class OrderService implements OrderContract
     ) {
     }
 
+    /**
+     * @throws \App\CRM\Application\Exceptions\OrderException
+     */
     #[NoReturn] public function create(OrderDTO $dto): void
     {
+        try {
+            $command = new CreateOrderCommand(
+                null,
+                now()->toDateString(),
+                $dto->customer,
+                null,
+                $dto->status,
+                $dto->warehouse_id
+            );
+            $order = $this->createOrderHandler->__invoke($command);
 
-        $command = new CreateOrderCommand(
-            null,
-            now()->toDateString(),
-            $dto->customer,
-            null,
-            $dto->status,
-            $dto->warehouse_id
-        );
-        $order = $this->createOrderHandler->__invoke($command);
-
-        $this->ordersRepository->create($order);
+            $this->ordersRepository->create($order);
+        } catch (\Throwable $exception) {
+            $this->logError($exception);
+            throw OrderException::errorCreate();
+        }
     }
 
     public function update(Order $order, array $data): Order

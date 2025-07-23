@@ -14,18 +14,17 @@ class OrdersRepository implements OrdersRepositoryContract
 {
     public function getAll(?int $paginate = null): array
     {
-        if($paginate){
+        if ($paginate) {
             $orders = EloquentOrder::query()->simplePaginate($paginate);
-        }
-        else{
+        } else {
             $orders = EloquentOrder::all();
         }
 
         return $orders->map(function (EloquentOrder $order) {
             return new Order(
                 $order->id,
-                $order->completed_at,
-                $order->created_at,
+                $order->completed_at?->toDateTimeString(),
+                $order->created_at?->toDateTimeString(),
                 $order->customer,
                 $order->status,
                 $order->warehouse_id
