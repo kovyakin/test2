@@ -2,16 +2,20 @@
 
 namespace app\CRM\Domain\Core\Providers;
 
+use App\CRM\Application\Services\OrderItemsService;
 use App\CRM\Application\Services\OrderService;
 use App\CRM\Application\Services\StocksGetProductsService;
 use App\CRM\Application\Services\WarehouseGeaAllService;
 use App\CRM\Domain\Core\Contracts\OrderContract;
+use App\CRM\Domain\Core\Contracts\OrderItemsContract;
+use App\CRM\Domain\Core\Contracts\OrderItemsRepositoryContract;
 use App\CRM\Domain\Core\Contracts\OrdersRepositoryContract;
 use App\CRM\Domain\Core\Contracts\ProductsRepositoryContract;
 use App\CRM\Domain\Core\Contracts\StocksGetProductsContract;
 use App\CRM\Domain\Core\Contracts\StocksRepositoryContract;
 use App\CRM\Domain\Core\Contracts\WarehouseGetAllContract;
 use App\CRM\Domain\Core\Contracts\WarehousesRepositoryContract;
+use App\CRM\Infrastructure\Eloquent\OrderItemsRepository;
 use App\CRM\Infrastructure\Eloquent\OrdersRepository;
 use App\CRM\Infrastructure\Eloquent\ProductsRepository;
 use App\CRM\Infrastructure\Eloquent\StockRepository;
@@ -40,6 +44,10 @@ class CrmProvider extends ServiceProvider implements DeferrableProvider
         $this->app->bind(StocksGetProductsContract::class, StocksGetProductsService::class);
 
         $this->app->bind(OrderContract::class, OrderService::class);
+
+        $this->app->bind(OrderItemsRepositoryContract::class, OrderItemsRepository::class);
+
+        $this->app->bind(OrderItemsContract::class, OrderItemsService::class);
     }
 
     /**
@@ -59,6 +67,7 @@ class CrmProvider extends ServiceProvider implements DeferrableProvider
             OrdersRepositoryContract::class,
             StocksRepositoryContract::class,
             OrderContract::class,
+            OrdersRepositoryContract::class,
         ];
     }
 }
